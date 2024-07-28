@@ -6,6 +6,7 @@ import com.sashwa.jwtdemo.model.RegisterUserDto;
 import com.sashwa.jwtdemo.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,15 +38,13 @@ public class AuthenticationService {
         return userRepository.save(user);
     }
 
-    public User authenticate(LoginUserDto input) {
-        authenticationManager.authenticate(
+    public Authentication authentication(LoginUserDto input) {
+        return authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
                 input.getEmail(),
                 input.getPassword()
             )
         );
-
-        return userRepository.findByEmail(input.getEmail()).orElseThrow();
     }
 
     public List<User> allUsers() {

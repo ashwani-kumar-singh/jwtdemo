@@ -1,33 +1,18 @@
 package com.sashwa.jwtdemo.response;
 
+import com.sashwa.jwtdemo.entities.RefreshToken;
+import lombok.Builder;
+import lombok.Data;
+import lombok.ToString;
+
+@Data
+@Builder
+@ToString(doNotUseGetters = true)
 public class LoginResponse {
     private String token;
 
+    private RefreshToken refreshToken;
+
     private long expiresIn;
 
-    public String getToken() {
-        return token;
-    }
-
-    public LoginResponse setToken(String token) {
-        this.token = token;
-        return this;
-    }
-
-    public long getExpiresIn() {
-        return expiresIn;
-    }
-
-    public LoginResponse setExpiresIn(long expiresIn) {
-        this.expiresIn = expiresIn;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "LoginResponse{" +
-                "token='" + token + '\'' +
-                ", expiresIn=" + expiresIn +
-                '}';
-    }
 }
